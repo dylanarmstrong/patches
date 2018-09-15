@@ -4,7 +4,7 @@
 // Just changing SETE to SETNO
 int main(int argc, char **argv) {
   FILE *fp = argc > 1 ? fopen(argv[1], "r+b") : stdin;
-  unsigned char buf[4];
+  unsigned char buf[16];
   int found1 = 0;
   int found2 = 0;
   int patched = 0;
@@ -42,8 +42,8 @@ int main(int argc, char **argv) {
 
       if (found1 == 6 || found2 == 6) {
         patched++;
-        printf("Patching 0x%lX\n", pos - 1);
-        fseek(fp, -1, SEEK_CUR);
+        printf("Patching 0x%lX\n", pos - i + 2);
+        fseek(fp, pos - i + 2, SEEK_SET);
         fwrite(patch, 1, 1, fp);
 
         if (found1 == 6) {
