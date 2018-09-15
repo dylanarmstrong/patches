@@ -1,7 +1,7 @@
 ## Binary Patches
 
-### Notes
-Just some binary patches I've written
+### Compilation
+`gcc patch && ./patch file`
 
 ### eu4
 Disable checksum validation
