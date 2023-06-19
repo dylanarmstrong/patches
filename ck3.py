@@ -18,9 +18,10 @@ def patch(offset, replace):
 def patch_checksum(s):
     # Looking for OnChecksumCalculated
     find = b"\x53\x48\x83\xec\x28\x48\x8d\x05\xa4\x16\x8e\x05"
+    # We want to start on byte 48, and not 53
     offset = s.find(find) + 1
     if offset > 1:
-        # Replace with a jmp to return immediately, as this method only sets if value doesn't match
+        # Replace with a JMP to return immediately, as this method only sets if value doesn't match
         print("Patching checksum offset: {}".format(hex(offset)))
         patch(offset, b"\xe9\x75\x00\x00\x00")
     else:
